@@ -1,0 +1,32 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Web Design Portfolio",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-plumber": "^1.0.1",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-sass": "^2.1.1",
+    "gulp-uglify": "^1.5.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dreboard/mco.git"
+  },
+  "keywords": [
+    "dre",
+    "board"
+  ],
+  "author": "Andre Board",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dreboard/mco/issues"
+  },
+  "homepage": "https://github.com/dreboard/mco#readme"
+}

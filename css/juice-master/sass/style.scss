@@ -1,0 +1,390 @@
+// Juice
+@import "../dist/juice";
+
+// Partials
+@import "colors";
+@import "fonts";
+@import "csshake";
+
+// Twitter Bootstrap
+@import "variables";
+@import "bootstrap";
+
+// Font Awesome
+@import "font-awesome";
+
+
+///////////////////////////////////
+// General
+///////////////////////////////////
+*,
+*:before,
+*:after {
+	transition: 0.3s ease-out;
+}
+
+b, strong,
+i, em,
+span {
+	transition: 0 !important;
+	&:before,
+	&:after {
+		transition: 0 !important;
+	}
+}
+
+html,
+html a {
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+}
+
+html {
+	min-width: $breakpoint-xxsmall-default;
+}
+
+body {
+	position: relative;
+}
+
+a {
+	@include hoverer(color, $dark-blue, $purple);
+}
+
+hr {
+	border-color: #cccccc;
+}
+
+h1,h2,h3,
+h4,h5,h6 {
+	margin: 0;
+}
+
+p {
+	text-align: justify;
+}
+
+
+///////////////////////////////////
+// Header
+///////////////////////////////////
+.navbar {
+	border: 0;
+	background-color: transparent;
+	.container-fluid {
+		background-color: $dark-blue;
+	}
+}
+.navbar-header {
+	position: relative;
+}
+.navbar-collapse {
+	box-shadow: none;
+}
+.navbar-toggle {
+	@include absolute(50%, 0);
+	transform: translateY(-50%);
+	.icon-bar {
+		background-color: $teal !important;
+	}
+	&.collapsed .icon-bar {
+		background-color: $white !important;
+	}
+}
+.navbar-brand {
+	font-family: $raleway;
+	font-size: 3rem;
+	line-height: 1;
+	opacity: 0;
+	&.visible {
+		opacity: 1;
+	}
+}
+#main-navigation {
+	.navbar-nav {
+		float: none;
+		text-align: center;
+		margin: 0;
+		li {
+			float: none;
+			display: inline-block;
+			a:focus {
+				color: $white;
+			}
+			&.active a:focus {
+				color: $dark-blue;
+			}
+		}
+	}
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+	background: $teal;
+	color: $dark-blue;
+}
+
+.progressbar {
+	float: left;
+	// background: $teal;
+	background: tint($dark-blue,10%);
+	@include coverer;
+}
+
+@keyframes fadeUp {
+	from {
+		transform: translateY(40px);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+.hero {
+	position: relative;
+	text-align: center;
+	background: $dark-blue;
+	padding: 80px 0 40px;
+	border-bottom: 5px solid $teal;
+	h1,
+	h2 {
+		font-weight: 200;
+	}
+	h1 {
+		color: $purple;
+		font-size: 11rem;
+		animation: fadeUp 1.5s;
+	}
+	h2 {
+		opacity: 0;
+		color: $white;
+		animation: fadeUp 1.5s 0.25s forwards;
+	}
+}
+
+
+///////////////////////////////////
+// Overview
+///////////////////////////////////
+.overview-links {
+	margin-top: 20px;
+	text-align: center;
+	ul {
+		list-style: none;
+		margin: 5px 0 15px 0;
+		padding: 0;
+		li {
+			display: inline-block;
+			padding: 8px 3px;
+			a {
+				color: $white;
+				@include hoverer(background, $dark-blue, $purple);
+				padding: 5px 10px;
+			}
+			&:before {
+				content: '';
+				@include size(5px);
+				background: $dark-blue;
+			}
+		}
+	}
+	h4 {
+		display: inline-block;
+		border-bottom: 1px solid $dark-blue;
+	}
+	[class^="col-xs-"] {
+		margin-bottom: 20px;
+	}
+}
+
+
+///////////////////////////////////
+// Main Content
+///////////////////////////////////
+section {
+	margin-top: 100px;
+	padding-top: 40px;
+}
+
+#about,
+#overview {
+	margin-top: 0;
+}
+
+.row {
+	margin: 0 -10px;
+}
+
+article {
+	float: none;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.section-heading {
+	padding: 40px 0;
+	text-align: center;
+	background: $teal;
+	h3 {
+		letter-spacing: 2px;
+		color: $dark-blue;
+	}
+}
+
+article:not(.section-heading) {
+	position: relative;
+	h3,h4 {
+		margin-bottom: 10px;
+	}
+	h3 {
+		display: inline-block;
+		margin-right: 15px;
+		@include bp(small) {
+			font-size: 2.1rem;
+		}
+	}
+	.article-header {
+		padding-top: 70px;
+	}
+	.show-source {
+		display: inline-block;
+		outline: none;
+		cursor: pointer;
+		font-size: 2.5rem;
+		@include bp(small) {
+			font-size: 2rem;
+		}
+	}
+	.description {
+		font-style: italic;
+	}
+}
+
+.contain {
+	width: 100%;
+	max-width: 50em;
+	margin: 0 auto;
+	padding: 0 10px;
+}
+
+.popover {
+	left: 0 !important;
+	width: 100vw;
+	max-width: 100vw;
+	padding: 0;
+	border: none;
+	border-radius: 0;
+	&.bottom > .arrow {
+		display: none;
+	}
+}
+
+.popover-content {
+	padding: 0;
+	pre {
+		margin-bottom: 0;
+	}
+	code {
+		max-width: none;
+		padding: 30px;
+		@include bp(max, rem-calc(800)) {
+			padding: 30px 10px;
+		}
+	}
+}
+
+///////////////////////////////////
+// Setup
+///////////////////////////////////
+.download-repo {
+	border: 1px solid $dark-blue;
+	color: $dark-blue;
+	padding: 10px 15px;
+	&:hover {
+		color: $purple;
+		border-color: $purple;
+	}
+}
+
+///////////////////////////////////
+// Code Styling
+///////////////////////////////////
+// @import "code_styles/obsidian-mod";
+@import "code_styles/custom";
+
+pre {
+  padding: 0 !important;
+  background: #282828;
+  border: none;
+  border-radius: 0;
+	* {
+		transition: 0 !important;
+	}
+	code {
+	  display: block;
+	  overflow-x: auto;
+	  color: $white;
+	  font-size: 16px;
+	  max-width: 50em;
+	  margin: 0 auto;
+	  padding: 30px 10px;
+	  background: transparent;
+	  -webkit-text-size-adjust: none;
+	  @include bp(max, 50em) {
+	    font-size: 1.2rem !important;
+	  }
+	}
+}
+
+///////////////////////////////////
+// Footer
+///////////////////////////////////
+.top {
+	@include fixed(null,null,-30px,10px);
+	@include size(30px, 30px);
+	background: $dark-blue;
+	line-height: 1;
+	opacity: 0;
+	border-radius: 5px;
+	@include triangle(up,5px,$white) {
+		@include centerer;
+		transform: translate(-50%, -80%);
+	}
+	&.visible {
+		bottom: 10px;
+		opacity: 1;
+	}
+	&:hover {
+		background: $purple;
+	}
+}
+
+@keyframes pulse {
+	from {
+		transform: scale(1);
+	}
+	to {
+		transform: scale(1.4);
+	}
+}
+footer {
+	font-size: 1.4rem;
+	background: $dark-blue;
+	margin-top: 40px;
+  padding: 20px 0;
+  color: $white;
+  .fa-heart {
+  	padding: 0 4px;
+  	color: #ff5555;
+  	// animation: pulse 1s ease-in-out infinite alternate;
+  }
+  a {
+  	color: $white;
+  }
+  p {
+	  text-align: center;
+  	margin: 0;
+  }
+}

@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+    <title>Juice: Mixins for life</title>
+    <link href="build/css/style.css?v=2" rel="stylesheet">
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      _gaq.push(['_setCookiePath', '/juice']);
+      ga('create', 'UA-57115824-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body id="top" data-spy="scroll" data-target=".navbar-collapse">
+    <a href="https://github.com/kjbrum/juice" target="_blank" onclick="_gaq.push(['_trackEvent', 'Engagement', 'Click', 'GitHub Ribbon']);"><img style="position:absolute;top:0;left:0;border:0;z-index:9999" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="progressbar" role="progressbar" style="width: 0%;"></div>
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand visible-xs" href="#top">Juice</a>
+        </div>
+        <div class="collapse navbar-collapse" id="main-navigation">
+          <ul class="nav navbar-nav">
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#mixins">Mixins</a></li>
+            <li><a href="#helpers">Helpers</a></li>
+            <li><a href="#functions">Functions</a></li>
+            <li><a href="#setup">Setup</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <header class="hero">
+      <h1>Juice</h1>
+      <h2>Mixins for Life</h2>
+    </header>
+
+    <!-- About Section -->
+    <section id="about">
+      <article>
+        <div class="contain">
+          <p>Simplify your life. Juice is a collection of Sass mixins/functions that are used to minimize the work needed to apply styling/properties to elements. Juice is not just a collection to help with cross browser support, so it is best paired with autoprefixer, for the best possible browser compatibility. You can enable prefixing for the mixin if you would like by setting the $browser-prefixes variable to true.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- Overview Section -->
+    <section id="overview">
+      <article class="section-heading">
+        <h3>Overview</h3>
+      </article>
+
+      <div class="contain">
+        <article class="overview-links">
+          <h4><a href="#mixins">Mixins</a></h4>
+          <ul>
+            <li><a href="#breakpoints">Breakpoints</a></li>
+            <li><a href="#show-hide">Show/Hide Element</a></li>
+            <li><a href="#single-side-border">Single Side Border Radius</a></li>
+            <li><a href="#single-transform">Single Transform</a></li>
+            <li><a href="#box-emboss">Box Emboss</a></li>
+            <li><a href="#letterpress">Letterpress</a></li>
+            <li><a href="#placeholder-color">Placeholder Color</a></li>
+            <li><a href="#sizing">Sizing</a></li>
+            <li><a href="#hoverer">Hoverer</a></li>
+            <li><a href="#responsive">Responsive</a></li>
+            <li><a href="#triangle">Triangle</a></li>
+            <li><a href="#circle">Circle</a></li>
+            <li><a href="#square">Square</a></li>
+            <li><a href="#position">Position</a></li>
+            <li><a href="#trbl">TRBL</a></li>
+            <li><a href="#image-preload">Image Preload</a></li>
+            <li><a href="#browser-prefixer">Browser Prefixer</a></li>
+          </ul>
+          <h4><a href="#helpers">Helpers</a></h4>
+          <ul>
+            <li><a href="#clearfix">Clearfix</a></li>
+            <li><a href="#hide-text">Hide Text</a></li>
+            <li><a href="#centerer">Centerer</a></li>
+            <li><a href="#vert-centerer">Vertical Centerer</a></li>
+            <li><a href="#coverer">Coverer</a></li>
+            <li><a href="#center-block">Center Block</a></li>
+            <li><a href="#clean">Clean</a></li>
+          </ul>
+          <h4><a href="#functions">Functions</a></h4>
+          <ul>
+            <li><a href="#tint">Tint</a></li>
+            <li><a href="#shade">Shade</a></li>
+            <li><a href="#strip-units">Strip Units</a></li>
+            <li><a href="#rem-calc">Rem Calc</a></li>
+            <li><a href="#em-calc">Em Calc</a></li>
+            <li><a href="#random-color">Random Color</a></li>
+            <li><a href="#reverse">Reverse String</a></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- Mixin Section -->
+    <section id="mixins">
+      <article class="section-heading">
+        <h3>Mixins</h3>
+      </article>
+
+      <article id="breakpoints">
+        <div class="contain">
+          <div class="article-header"><h3>Breakpoints</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>$breakpoints: (
+  'xxlarge': ' (min-width: $breakpoint-xlarge-default + $onepx)',
+  'xlarge-only': ' (min-width: $breakpoint-large-default + $onepx) and (max-width: $breakpoint-xlarge-default)',
+  'xlarge-up': ' (min-width: $breakpoint-large-default + $onepx)',
+  'xlarge': '(max-width: $breakpoint-xlarge-default)',
+  'large-only': '(min-width: $breakpoint-medium-default + $onepx) and (max-width: $breakpoint-large-default)',
+  'large-up': '(min-width: $breakpoint-medium-default + $onepx)',
+  'large': ' (max-width: $breakpoint-large-default)',
+  'medium-only': ' (min-width: $breakpoint-small-default + $onepx) and (max-width: $breakpoint-medium-default)',
+  'medium-up': ' (min-width: $breakpoint-small-default + $onepx)',
+  'medium': '(max-width: $breakpoint-medium-default)',
+  'small-only': '(min-width: $breakpoint-xsmall-default + $onepx) and (max-width: $breakpoint-small-default)',
+  'small-up': '(min-width: $breakpoint-xsmall-default + $onepx)',
+  'small': ' (max-width: $breakpoint-small-default)',
+  'xsmall-only': ' (min-width: $breakpoint-xxsmall-default + $onepx) and (max-width: $breakpoint-xsmall-default)',
+  'xsmall-up': ' (min-width: $breakpoint-xxsmall-default + $onepx)',
+  'xsmall': '(max-width: $breakpoint-xsmall-default)',
+  'xxsmall': ' (max-width: $breakpoint-xxsmall-default)',
+  'iphone3': ' (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-device-pixel-ratio: 1)',
+  'iphone3-landscape': ' (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-device-pixel-ratio: 1) and (orientation: landscape)',
+  'iphone3-portrait': '(min-device-width: 320px) and (max-device-width: 480px) and (-webkit-device-pixel-ratio: 1) and (orientation: portrait)',
+  'iphone4': ' (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-device-pixel-ratio: 2) and (device-aspect-ratio: 2/3)',
+  'iphone4-landscape': ' (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-device-pixel-ratio: 2) and (device-aspect-ratio: 2/3) and (orientation: landscape)',
+  'iphone4-portrait': '(min-device-width: 320px) and (max-device-width: 480px) and (-webkit-device-pixel-ratio: 2) and (device-aspect-ratio: 2/3) and (orientation: portrait)',
+  'iphone5': ' (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-device-pixel-ratio: 2) and (device-aspect-ratio: 40/71)',
+  'iphone5-landscape': ' (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-device-pixel-ratio: 2) and (device-aspect-ratio: 40/71) and (orientation: landscape)',
+  'iphone5-portrait': '(min-device-width: 320px) and (max-device-width: 568px) and (-webkit-device-pixel-ratio: 2) and (device-aspect-ratio: 40/71) and (orientation: portrait)',
+  'iphone6': ' (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-device-pixel-ratio: 2)',
+  'iphone6-landscape': ' (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)',
+  'iphone6-portrait': '(min-device-width: 375px) and (max-device-width: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)',
+  'iphone6-plus': '(min-device-width: 414px) and (max-device-width: 736px) and (-webkit-device-pixel-ratio: 3)',
+  'iphone6-plus-landscape': '(min-device-width: 414px) and (max-device-width: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)',
+  'iphone6-plus-portrait': ' (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)',
+  'ipad': '(min-device-width: 768px) and (max-device-width: 1024px)',
+  'ipad-landscape': '(min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape)',
+  'ipad-portrait': ' (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait)',
+  'ipad-retina': ' (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-device-pixel-ratio: 2)',
+  'ipad-retina-landscape': ' (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)',
+  'ipad-retina-portrait': '(min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)',
+  'hdpi': '(-webkit-min-device-pixel-ratio: $hdpi-ratio-default),
+          only screen and (min--moz-device-pixel-ratio: $hdpi-ratio-default),
+          only screen and (-moz-min-device-pixel-ratio: $hdpi-ratio-default),
+          only screen and (-o-min-device-pixel-ratio: #{$hdpi-ratio-default}/1),
+          only screen and (min-resolution: #{round($hdpi-ratio-default*96)}dpi),
+          only screen and (min-resolution: #{$hdpi-ratio-default}dppx)'
+);
+@mixin bp($break, $viewport1: null) {
+  // preset breakpoint
+  @if not $viewport1 {
+    @if map-has-key($breakpoints, $break) {
+      @media only screen and #{map-get($breakpoints, $break)} { @content; }
+    }
+    @else {
+      @warn 'Couldn\'t find a breakpoint named #{$break}.';
+    }
+  }
+  @else {
+    // min breakpoint
+    @if $break == min {
+      @media screen and (min-width: $viewport1) { @content; }
+    }
+    // max breakpoint
+    @else if $break == max {
+      @media screen and (max-width: $viewport1) { @content; }
+    }
+    // min & max breakpoint
+    @else {
+      @media screen and (min-width: $break) and (max-width: $viewport1) { @content; }
+    }
+  }
+}
+</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">An extensive mixin for easily changing styles for specific media queries. You can set the default breakpoints using the breakpoint variables.</p>
+          <p><strong>Available preset values:</strong> xxlarge, xlarge-only, xlarge-up, xlarge, large-only, large-up, large, medium-only, medium-up, medium, small-only, small-up, small, xsmall-only, xsmall-up, xsmall, xxsmall, iphone3, iphone3-landscape, iphone3-portrait, iphone4, iphone4-landscape, iphone4-portrait, iphone5, iphone5-landscape, iphone5-portrait, iphone6, iphone6-landscape, iphone6-portrait, iphone6-plus, iphone6-plus-landscape, iphone6-plus-portrait, ipad, ipad-landscape, ipad-portrait, ipad-retina, ipad-retina-landscape, ipad-retina-portrait, hdpi.</p>
+          <p><strong>Use preset values:</strong> @include bp(preset)<br><strong>Set a max-width:</strong> @include bp(max,500px)<br><strong>Set a min-width:</strong> @include bp(min,250px)<br><strong>Set a min & max width:</strong> @include bp(500px,1000px)</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element {
+  @include bp(480px,1024px) {
+    color: black;
+  }
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">@media screen and (min-width: 480px) and (max-width: 1024px) {
+  .element {
+    color: black;
+  }
+}</code></pre>
+      </article>
+
+      <article id="show-hide">
+        <div class="contain">
+          <div class="article-header"><h3>Show/Hide Element</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@mixin show($breakpoint: null, $display: $show-display-default) {
+  @if $breakpoint {
+    display: none;
+    @include bp($breakpoint) {
+      display: $display;
+    }
+  } @else {
+    display: $display;
+  }
+}
+@mixin hide($breakpoint: null) {
+  @if $breakpoint {
+    @include bp($breakpoint) {
+      display: none !important;
+    }
+  } @else {
+    display: none !important;
+  }
+}
+</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Set certain points at which you want to show or hide a block element.</p>
+          <p><strong>Show Arguments:</strong> $breakpoint, $display</p>
+          <p><strong>Hide Argument:</strong> $breakpoint</p>
+          <p><strong>Available options to show/hide:</strong> Breakpoint preset values.</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element {
+  @include show(small-only, inline-block);
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">.element {
+  display: none;
+}
+@media only screen and (min-width: 30.0625em) and (max-width: 40em) {
+  .element {
+    display: inline-block;
+  }
+}</code></pre>
+      </article>
+
+      <article id="single-side-border">
+        <div class="contain">
+          <div class="article-header"><h3>Single Side Border Radius</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@mixin border-top-radius($radius: $border-radius-default) {
+  border-top-right-radius: $radius;
+  border-top-left-radius: $radius;
+}
+@mixin border-right-radius($radius: $border-radius-default) {
+  border-top-right-radius: $radius;
+  border-bottom-right-radius: $radius;
+}
+@mixin border-bottom-radius($radius: $border-radius-default) {
+  border-bottom-right-radius: $radius;
+  border-bottom-left-radius: $radius;
+}
+@mixin border-left-radius($radius: $border-radius-default) {
+  border-top-left-radius: $radius;
+  border-bottom-left-radius: $radius;
+}</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Apply border radius to a single side of an element.</p>
+          <p><strong>Argument:</strong> $border-radius</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element {
+  @include border-top-radius(5px);
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">.element {
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}</code></pre>
+      </article>
+
+      <article id="single-transform">
+        <div class="contain">
+          <div class="article-header"><h3>Single Transform</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@mixin transform-single($property, $value) {
+  transform: #{$property}unquote('('#{$value}')');
+}
+@mixin rotate($deg) {
+  @include transform-single(rotate, $deg);
+}
+@mixin rotateX($deg) {
+  @include transform-single(rotateX, $deg);
+}
+@mixin rotateY($deg) {
+  @include transform-single(rotateY, $deg);
+}
+@mixin rotateZ($deg) {
+  @include transform-single(rotateZ, $deg);
+}
+@mixin rotate3d($x, $y, $z, $deg) {
+  $multi-var: $x, $y, $z, $deg;
+  @include transform-single(rotate3d, $multi-var);
+}
+@mixin scale($ratio) {
+  @include transform-single(scale, $ratio);
+}
+@mixin scaleX($ratio) {
+  @include transform-single(scaleX, $ratio);
+}
+@mixin scaleY($ratio) {
+  @include transform-single(scaleY, $ratio);
+}
+@mixin scaleZ($ratio) {
+  @include transform-single(scaleZ, $ratio);
+}
+@mixin scale3d($x, $y, $z) {
+  $multi-var: $x, $y, $z;
+  @include transform-single(scale3d, $multi-var);
+}
+@mixin skew($x, $y) {
+  $multi-var: $x, $y;
+  @include transform-single(skew, $multi-var);
+  backface-visibility: hidden;
+}
+@mixin skewX($deg) {
+  @include transform-single(skewX, $deg);
+  backface-visibility: hidden;
+}
+@mixin skewY($deg) {
+  @include transform-single(skewY, $deg);
+  backface-visibility: hidden;
+}
+@mixin translate($x, $y) {
+  $multi-var: $x, $y;
+  @include transform-single(translate, $multi-var);
+}
+@mixin translateX($x) {
+  @include transform-single(translateX, $x);
+}
+@mixin translateY($y) {
+  @include transform-single(translateY, $y);
+}
+@mixin translateZ($z) {
+  @include transform-single(translateZ, $z);
+}
+@mixin translate3d($x, $y, $z) {
+  $multi-var: $x, $y, $z;
+  @include transform-single(translate3d, $multi-var);
+}</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Small shortcut mixins to apply a single transform property.</p>
+          <p><strong>Available mixins:</strong> rotate, rotateX, rotateY, rotateZ, rotate3d, scale, scaleX, scaleY, scaleZ, scale3d, skew, skewX, skewY, translate, translateX, translateY, translateZ, translate3d.</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element {
+  @include rotate(45deg);
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">.element {
+  transform: rotate(45deg);
+}</code></pre>
+      </article>
+
+      <article id="box-emboss">
+        <div class="contain">
+          <div class="article-header"><h3>Box Emboss</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@mixin box-emboss($opacity, $opacity2){
+  box-shadow: rgba(white,$opacity) 0 1px 0, inset rgba(black,$opacity2) 0 1px 0;
+}</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Apply an emboss effect to an element.</p>
+          <p><strong>Arguments (decimal):</strong> $opacity, $opacity2</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element {
+  @include box-emboss(0.4,0.6);
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">.element {
+  box-shadow: rgba(255, 255, 255, 0.4) 0 1px 0, inset rgba(0, 0, 0, 0.8) 0 1px 0;
+}</code></pre>
+      </article>
+
+      <article id="letterpress">
+        <div class="contain">
+          <div class="article-header"><h3>Letterpress</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@mixin letterpress($opacity){
+  text-shadow: rgba(white,$opacity) 0 1px 0;
+}</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Apply a letterpress effect to an element's text.</p>
+          <p><strong>Argument (decimal):</strong> $opacity</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element {
+  @include letterpress(0.75);
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">.element {
+  text-shadow: rgba(255, 255, 255, 0.75) 0 1px 0;
+}</code></pre>
+      </article>
+
+      <article id="placeholder-color">
+        <div class="contain">
+          <div class="article-header"><h3>Placeholder Color</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@mixin placeholder-color($color: $placeholder-color-default) {
+  &::placeholder {
+    color: $color;
+  }
+}</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Set the color of an element's placeholder text.</p>
+          <p><strong>Optional Argument:</strong> $color</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">input {
+  @include placeholder-color(#222222);
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">input::placeholder {
+  color: #222222;
+}</code></pre>
+      </article>
+
+      <article id="sizing">
+        <div class="contain">
+          <div class="article-header"><h3>Sizing</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+@mixin square($size) {
+  @include size($size, $size);
+}</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Set an element's width and height. Also able to pass a single value for a square.</p>
+          <p><strong>Set width and height:</strong> @include size(50px, 25px)<br><strong>Create a square (Option 1):</strong> @include size(25px)</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element {
+  @include size(25px,100px);
+  &:after {
+    @include size(10px);
+  }
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">.element {
+  width: 25px;
+  height: 100px;
+}
+.element:after {
+  width: 10px;
+  height: 10px;
+}</code></pre>
+      </article>
+
+      <article id="hoverer">
+        <div class="contain">
+          <div class="article-header"><h3>Hoverer</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@mixin hoverer($property, $normal, $hovered) {
+  #{$property}: $normal;
+  &:hover {
+    #{$property}: $hovered;
+  }
+}</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Set the value of a property for it's normal and hover states.</p>
+          <p><strong>Arguments:</strong> $property, $normal, $hovered</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element {
+  @include hoverer(color, #555555, #222222);
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">.element {
+  color: #555555;
+}
+.element:hover {
+  color: #222222;
+}</code></pre>
+      </article>
+
+      <article id="responsive">
+        <div class="contain">
+          <div class="article-header"><h3>Responsive</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@mixin responsive($property, $base, $medium:false, $small:false) {
+  #{$property}: $base;
+  @if $medium {
+    @include bp(medium) {
+      #{$property}: $medium;
+    }
+  }
+  @if $small {
+    @include bp(small) {
+      #{$property}: $small;
+    }
+  }
+}</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Set the values for a specific property at 3 different breakpoints.</p>
+          <p><strong>Arguments:</strong> $property, $base, $medium (optional), $small (optional)</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element {
+  @include responsive(background-color, #FFFFFF, #DDDDDD, #BBBBBB);
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">.element {
+  background-color: #FFFFFF;
+}
+@media only screen and (max-width: 64rem) {
+  .element {
+    background-color: #DDDDDD;
+  }
+}
+@media only screen and (max-width: 40rem) {
+  .element {
+    background-color: #BBBBBB;
+  }
+}</code></pre>
+      </article>
+
+      <article id="triangle">
+        <div class="contain">
+          <div class="article-header"><h3>Triangle</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@mixin triangle($direction: $triangle-direction-default,
+                $size: $triangle-size-default,
+                $color: $triangle-color-default,
+                $center: false,
+                $element: $triangle-element-default) {
+  &:#{$element} {
+    @if not $center {
+      position: absolute;
+    }
+    content:'';
+    @include square(0);
+    border-style: solid;
+    @if $direction == up {
+      border-width: 0 $size ($size*1.625) $size;
+      border-color: transparent transparent $color transparent;
+      @if $center {
+        @include absolute(null,null,100%,50%);
+        transform: translateX(-$size);
+      }
+    }
+    @else if $direction == up-right {
+      border-width: 0 $size $size 0;
+      border-color: transparent $color transparent transparent;
+      @if $center {
+        @include absolute(0,0);
+      }
+    }
+    @else if $direction == right {
+      border-width: $size 0 $size ($size*1.625);
+      border-color: transparent transparent transparent $color;
+      @if $center {
+        @include absolute(50%,null,null,100%);
+        transform: translateY(-$size);
+      }
+    }
+    @else if $direction == down-right {
+      border-width: 0 0 $size $size;
+      border-color: transparent transparent $color transparent;
+      @if $center {
+        @include absolute(null,0,0);
+      }
+    }
+    @else if $direction == down {
+      border-width: ($size*1.625) $size 0 $size;
+      border-color: $color transparent transparent transparent;
+      @if $center {
+        @include absolute(100%,null,null,50%);
+        transform: translateX(-$size);
+      }
+    }
+    @else if $direction == down-left {
+      border-width: $size 0 0 $size;
+      border-color: transparent transparent transparent $color;
+      @if $center {
+        @include absolute(null,null,0,0);
+      }
+    }
+    @else if $direction == left {
+      border-width: $size ($size*1.625) $size 0;
+      border-color: transparent $color transparent transparent;
+      @if $center {
+        @include absolute(50%,100%);
+        transform: translateY(-$size);
+      }
+    }
+    @else if $direction == up-left {
+      border-width: $size $size 0 0;
+      border-color: $color transparent transparent transparent;
+      @if $center {
+        @include absolute(0,null,null,0);
+      }
+    }
+    @else {
+      @warn 'Available directions: up, up-right, right, down-right, down, down-left, left, up-left.';
+    }
+    @content;
+  }
+}</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Create a psuedo element triangle.</p>
+          <p><strong>Optional Arguments:</strong> $direction, $size, $color, $center, $element</p>
+          <p><strong>Available directions:</strong> up, up-right, right, down-right, down, down-left, left, up-left</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element {
+  @include triangle(up-right, 50px, grey, true, before) {
+    background-color: red;
+  }
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">.element:before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 50px 50px 0;
+  border-color: transparent grey transparent transparent;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+}</code></pre>
+      </article>
+
+      <article id="circle">
+        <div class="contain">
+          <div class="article-header"><h3>Circle</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@mixin circle($size: $circle-size-default,
+              $color: $circle-color-default,
+              $border-width: $circle-border-width-default,
+              $border-color: $circle-border-color-default,
+              $display: $circle-display-default) {
+  display: $display;
+  border-radius: 50%;
+  @if $border-width {
+    @include square($size);
+    background-color: $color;
+    border: $border-width solid $border-color;
+  }
+  @else{
+    @if $color == inherit {
+      @include square(0);
+      border-width: $size/2;
+      border-style: solid;
+    }
+    @else {
+      @include square($size);
+      background-color: $color;
+    }
+  }
+}</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Create a circle, with an optional border.</p>
+          <p><strong>Optional Arguments:</strong> $size, $color, $border-width, $border-color, $display</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element {
+  @include circle(40px, red, 5px);
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">.element {
+  display: inline-block;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: red;
+  border: 5px solid #222222;
+}</code></pre>
+      </article>
+
+      <article id="square">
+        <div class="contain">
+          <div class="article-header"><h3>Square</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@mixin square($size: $square-size-default,
+              $color: $square-color-default,
+              $border-width: $square-border-width-default,
+              $border-color: $square-border-color-default,
+              $element: $square-element-default) {
+  &:#{$element} {
+    content: '';
+    position: absolute;
+    @include size($size);
+    background: $color;
+    @if $border-width {
+      border: $border-width solid $border-color;
+    }
+  }
+}
+}</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Create a psuedo element square, with an optional border.</p>
+          <p><strong>Optional Arguments:</strong> $size, $color, $border-width, $border-color, $element</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element {
+  @include square(25px, blue, 2px, teal);
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">.element:after {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background: blue;
+  border: 2px solid teal;
+}</code></pre>
+      </article>
+
+      <article id="position">
+        <div class="contain">
+          <div class="article-header"><h3>Position</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@mixin position($type,
+                $top: $position-default,
+                $right: $position-default,
+                $bottom: $position-default,
+                $left: $position-default) {
+  position: $type;
+  $allowed_types: absolute relative fixed;
+  @if not index($allowed_types, $type) {
+    @warn 'Unknown position: #{$type}.';
+  }
+  @each $data in top $top, right $right, bottom $bottom, left $left {
+    #{nth($data, 1)}: nth($data, 2);
+  }
+}
+@mixin absolute($top: $position-default, $right: $position-default, $bottom: $position-default, $left: $position-default) {
+  @include position(absolute, $top, $right, $bottom, $left);
+}
+@mixin relative($top: $position-default, $right: $position-default, $bottom: $position-default, $left: $position-default) {
+  @include position(relative, $top, $right, $bottom, $left);
+}
+@mixin fixed($top: $position-default, $right: $position-default, $bottom: $position-default, $left: $position-default) {
+  @include position(fixed, $top, $right, $bottom, $left);
+}</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Easily set an element's position and "trbl" values.</p>
+          <p><strong>Arguments:</strong> $type, $top, $right, $bottom, $left</p>
+          <p><strong>The long way:</strong> @include position(relative, 5px, 5px, 10px, 15px)<br><strong>Set absolute:</strong> @include absolute(10px, 25px, null, 50px)<br><strong>Set relative:</strong> @include relative(10px, 35px)<br><strong>Set fixed:</strong> @include fixed(null, null, 20px, 20px)</p>
+          <p class="description"><strong>Note:</strong> Pass null as the value if you don't want a "trbl" property to be set.</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element {
+  @include position(absolute,null,null,10px,15px);
+}
+.absolute-element {
+  @include absolute(null,25px,25px);
+}
+.relative-element {
+  @include relative(15px);
+}
+.fixed-element {
+  @include fixed(10px,50px);
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">.element {
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+}
+.absolute-element {
+  position: absolute;
+  right: 25px;
+  bottom: 25px;
+}
+.relative-element {
+  position: relative;
+  top: 15px;
+}
+.fixed-element {
+  position: fixed;
+  top: 10px;
+  right: 50px;
+}</code></pre>
+      </article>
+
+      <article id="trbl">
+        <div class="contain">
+          <div class="article-header"><h3>TRBL</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@mixin trbl($top: $position-default,
+            $right: $position-default,
+            $bottom: $position-default,
+            $left: $position-default) {
+  @each $data in top $top, right $right, bottom $bottom, left $left {
+    #{nth($data, 1)}: nth($data, 2);
+  }
+}
+@mixin top-left {
+  @include trbl(0,null,null,0);
+}
+@mixin top-right {
+  @include trbl(0,0);
+}
+@mixin bottom-left {
+  @include trbl(null,null,0,0);
+}
+@mixin bottom-right {
+  @include trbl(null,0,0,null);
+}</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Easily set an element's "trbl" values.</p>
+          <p><strong>Arguments:</strong> $top, $right, $bottom, $left</p>
+          <p><strong>Extra Mixins:</strong> top-left, top-right, bottom-left, bottom-right</p>
+          <p class="description"><strong>Note:</strong> Pass null as the value if you don't want a property to be set.</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element {
+  @include trbl(55px,null,null,15px);
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">.element {
+  top: 55px;
+  left: 15px;
+}</code></pre>
+      </article>
+
+      <article id="image-preload">
+        <div class="contain">
+          <div class="article-header"><h3>Image Preload</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@mixin image-preload($preload: run) {
+  @if not variable-exists(_preload-image-list) {
+    $_preload-image-list: ()!global;
+  }
+  @if not variable-exists(_preload-image-urls) {
+    $_preload-image-urls: ()!global;
+  }
+  @if not variable-exists(_preload-images-loaded) {
+    $_preload-images-loaded: false!global;
+  }
+  @if $preload == run and not $_preload-images-loaded {
+    $_preload-images-loaded: true!global;
+    html:after {
+      content: '';
+      display: none;
+      background-image: $_preload-image-urls;
+    }
+  } @else {
+    $_preload-image-list: join($preload, $_preload-image-list)!global;
+    $image-urls: ();
+    @if length($_preload-image-list) > 0 {
+      @for $i from 1 through length($_preload-image-list) {
+        $image-urls: join(url(#{nth($_preload-image-list,$i)}), $image-urls);
+      }
+      $result: ();
+      @each $item in $image-urls {
+        @if not index($result, $item) {
+            $result: append($result, $item, comma);
+        }
+      }
+      $_preload-image-urls: $result!global;
+    }
+  }
+}</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Preload images by setting them to a background-image on the html:after element.</p>
+          <p><strong>Arguments:</strong> Path to image(s)</p>
+          <p class="description"><strong>Note:</strong> Call "@include image-preload;" after all images in your stylesheet to load images, any calls after this will be ignored.</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element1:hover {
+  $image1: 'http://placeimg.com/500/350/tech/grayscale';
+  background-image: url($image1);
+  @include image-preload($image1);
+}
+.element2:hover {
+  $image2: 'http://placeimg.com/500/350/tech';
+  background-image: url($image2);
+  @include image-preload($image2);
+}
+
+@include image-preload;</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">.element1:hover {
+  background-image: url("http://placeimg.com/500/350/tech");
+}
+.element2:hover {
+  background-image: url("http://placeimg.com/500/350/tech/grayscale");
+}
+
+html:after {
+  content: '';
+  display: none;
+  background-image: url(http://placeimg.com/500/350/tech),
+          url(http://placeimg.com/500/350/tech/grayscale);
+}</code></pre>
+      </article>
+
+      <article id="browser-prefixer">
+        <div class="contain">
+          <div class="article-header"><h3>Juice Prefixer</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@mixin juice-prefixer($property, $value, $prefixes) {
+  @each $prefix in $prefixes {
+    @if $prefix == webkit {
+      -webkit-#{$property}: #{$value};
+    }
+    @else if $prefix == moz {
+      -moz-#{$property}: #{$value};
+    }
+    @else if $prefix == ms {
+      -ms-#{$property}: #{$value};
+    }
+    @else if $prefix == o {
+      -o-#{$property}: #{$value};
+    }
+    @else if $prefix == spec {
+      #{$property}: #{$value};
+    }
+    @else  {
+      @warn 'Unrecognized prefix: #{$prefix}';
+    }
+  }
+}
+</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Mixin used to add vendor prefixes for cross browser compatibility.</p>
+          <p><strong>Arguments:</strong> $property, $value, $prefixes</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element {
+  @include juice-prefixer(transform, scale(1.5), webkit moz ms o spec);
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">.element {
+  -webkit-transform: scale(1.5);
+  -moz-transform: scale(1.5);
+  -ms-transform: scale(1.5);
+  -o-transform: scale(1.5);
+  transform: scale(1.5);
+}</code></pre>
+      </article>
+
+    </section>
+
+
+    <!-- Helpers Section -->
+    <section id="helpers">
+      <article class="section-heading">
+        <div class="article-header"><h3>Helpers</h3>
+      </article>
+
+      <article id="clearfix">
+        <div class="contain">
+          <div class="article-header"><h3>Clearfix</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@mixin clearfix {
+  *zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+    content:'';
+    line-height: 0;
+  }
+  &:after {
+    clear: both;
+  }
+}</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Just an awesome clearfix.</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element {
+  @include clearfix;
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">.element {
+  *zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+    content: "";
+    line-height: 0;
+  }
+  &:after {
+    clear: both;
+  }
+}</code></pre>
+      </article>
+
+      <article id="hide-text">
+        <div class="contain">
+          <div class="article-header"><h3>Hide Text</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@mixin hide-text {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+}</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Hide the text in an element.</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element {
+  @include hide-text;
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">.element {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+}</code></pre>
+      </article>
+
+      <article id="centerer">
+        <div class="contain">
+          <div class="article-header"><h3>Centerer</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@mixin centerer {
+  @include absolute(50%,null,null,50%);
+  transform: translate(-50%,-50%);
+}</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Center an element vertically and horizontally.</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element {
+  @include centerer;
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">.element {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}</code></pre>
+      </article>
+
+      <article id="vert-centerer">
+        <div class="contain">
+          <div class="article-header"><h3>Vertical Centerer</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@mixin vert-centerer {
+  @include relative(50%);
+  transform: translateY(-50%);
+}</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Center an element vertically.</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element {
+  @include vert-centerer;
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">.element {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}</code></pre>
+      </article>
+
+      <article id="coverer">
+        <div class="contain">
+          <div class="article-header"><h3>Coverer</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@mixin coverer {
+  @include absolute(0,null,null,0);
+  @include size(100%);
+}</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Force an element to fill the screen or parent element.</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element {
+  @include coverer;
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">.element {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}</code></pre>
+      </article>
+
+      <article id="center-block">
+        <div class="contain">
+          <div class="article-header"><h3>Center Block</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@mixin center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Turn an element into a block and center it with margins.</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element {
+  @include center-block;
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">.element {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}</code></pre>
+      </article>
+
+      <article id="clean">
+        <div class="contain">
+          <div class="article-header"><h3>Clean</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@mixin clean {
+  margin: 0;
+  padding: 0;
+}</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Remove the margin and padding from an element.</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element {
+  @include clean;
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">.element {
+  margin: 0;
+  padding: 0;
+}</code></pre>
+      </article>
+
+    </section>
+
+
+    <!-- Functions Section -->
+    <section id="functions">
+      <article class="section-heading">
+        <div class="article-header"><h3>Functions</h3>
+      </article>
+
+      <article id="tint">
+        <div class="contain">
+          <div class="article-header"><h3>Tint</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@function tint($color, $percent: $mix-percent-default){
+  @return mix(white, $color, $percent);
+}</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Mix a percentage of white with a color.</p>
+          <p><strong>Arguments:</strong> $color, $mix-percent</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element {
+  color: tint(#0000ff,15%);
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">.element {
+  color: #2626ff;
+}</code></pre>
+      </article>
+
+      <article id="shade">
+        <div class="contain">
+          <div class="article-header"><h3>Shade</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@function shade($color, $percent: $mix-percent-default){
+  @return mix(black, $color, $percent);
+}</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Mix a percentage of black with a color.</p>
+          <p><strong>Arguments:</strong> $color, $mix-percent</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element {
+  color: shade(#0000ff,15%);
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">.element {
+  color: #0000d8;
+}</code></pre>
+      </article>
+
+      <article id="strip-units">
+        <div class="contain">
+          <div class="article-header"><h3>Strip Units</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@function strip-units($value) {
+  @return $value / ($value * 0 + 1);
+}</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Remove any units from a number.</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element {
+  font-size: strip-units(5px);
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">.element {
+  font-size: 5;
+}</code></pre>
+      </article>
+
+      <article id="rem-calc">
+        <div class="contain">
+          <div class="article-header"><h3>Rem Calc</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@function rem-calc(px, $base-val: $base-px-default) {
+  @if not unitless($px) {
+    $px: strip-units($px);
+  }
+  @if not unitless($base-val) {
+    $base-val: strip-units($base-val);
+  }
+  @return ($px / $base-val) * 1rem;
+}</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Calculate rems from a px value.</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element {
+  font-size: rem-calc(15px);
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">.element {
+  font-size: 0.9375rem;
+}</code></pre>
+      </article>
+
+      <article id="em-calc">
+        <div class="contain">
+          <div class="article-header"><h3>Em Calc</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@function em-calc($px, $base-val: $base-px-default) {
+  @if not unitless($px) {
+    $px: strip-units($px);
+  }
+  @if not unitless($base-val) {
+    $base-val: strip-units($base-val);
+  }
+  @return ($px / $base-val) * 1em;
+}</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Calculate ems from a px value.</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element {
+  font-size: em-calc(10px);
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">.element {
+  font-size: 0.625em;
+}</code></pre>
+      </article>
+
+      <article id="random-color">
+        <div class="contain">
+          <div class="article-header"><h3>Random Color</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@function random-color($min: 0, $max: 255, $alpha: 1) {
+  @if $min < 0 {
+    $min: -1;
+  } @else {
+    $min: $min - 1;
+  }
+  @if $max > 255 {
+    $max: 256;
+  } @else {
+    $max: $max + 1;
+  }
+  $red: random($max) + $min;
+  $green: random($max) + $min;
+  $blue: random($max) + $min;
+  @return rgba($red, $green, $blue, $alpha);
+}</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Generate a random hex or rgb color from rgb values.</p>
+          <p><strong>Optional Arguments:</strong> $min(0-255), $max(0-255), $alpha(0-1)
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element {
+  background-color: random-color(50,150,0.75);
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">.element {
+  background-color: rgba(143, 56, 61, 0.75);
+}</code></pre>
+      </article>
+
+      <article id="reverse">
+        <div class="contain">
+          <div class="article-header"><h3>Reverse String</h3>
+          <a class="show-source" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+<pre><code class='language-scss'>@function reverse($string) {
+  $reversed-string: '';
+  @for $i from 1 through str-length($string) {
+    $char: str-slice($string, $i, $i);
+    $reversed-string: '#{$char}#{$reversed-string}';
+  }
+  @return #{$reversed-string};
+}</code></pre>"><i class="fa fa-code"></i></a></div>
+          <p class="description">Reverse a string.</p>
+          <hr>
+          <h4>Example:</h4>
+        </div>
+<pre><code class="language-scss">.element {
+  background-color: reverse(eulb);
+}</code></pre>
+          <div class="contain"><h4>CSS Output:</h4></div>
+<pre><code class="language-scss">.element {
+  background-color: blue;
+}</code></pre>
+      </article>
+
+    </section>
+
+
+    <!-- Setup Section -->
+    <section id="setup">
+      <article class="section-heading">
+        <h3>Setup</h3>
+      </article>
+
+      <article id="install">
+        <div class="contain">
+          <div class="article-header"><h3>Installation</h3></div>
+          <p>You can use either bower or just clone the github repo directly.</p>
+          <hr>
+          <h4>Bower</h4>
+        </div>
+<pre><code class="language-scss">$ bower install juice</code></pre>
+        <div class="contain">
+          <hr>
+          <h4>Clone/Fork</h4>
+        </div>
+<pre><code class="language-scss">$ git clone git@github.com:kjbrum/juice.git</code></pre>
+        <div class="contain">
+          <hr>
+          <a class="shake shake-little download-repo" href="https://github.com/kjbrum/juice/" target="_blank">View on Github</a>
+          <a class="shake shake-little download-repo" href="https://github.com/kjbrum/juice/archive/master.zip">Download Repo</a>
+        </div>
+      </article>
+
+      <article id="using">
+        <div class="contain">
+          <div class="article-header"><h3>Using the file</h3></div>
+          <p>Just import the "_juice.scss" file into your main scss file.</p>
+        </div>
+<pre><code class="language-scss">// In the SCSS file
+
+// Enabling browser prefixing
+$browser-prefixes: true !default;
+
+// Import the dist file
+@import "juice";
+</code></pre>
+      </article>
+
+      <article id="settings">
+        <div class="contain">
+          <div class="article-header"><h3>Settings</h3></div>
+          <p>You can override these variables at the top of your main scss file to change the default values.</p>
+        </div>
+<pre><code class="language-scss">// Base px
+$base-px-default: 16px !default;
+$browser-prefixes: false !default;
+// Breakpoints
+$hdpi-ratio-default: 1.3 !default;
+$breakpoint-xlarge-default: em-calc(1920) !default;
+$breakpoint-large-default: em-calc(1440) !default;
+$breakpoint-medium-default: em-calc(1024) !default;
+$breakpoint-small-default: em-calc(640) !default;
+$breakpoint-xsmall-default: em-calc(480) !default;
+$breakpoint-xxsmall-default: em-calc(320) !default;
+// Show/Hide
+$show-display-default: block !default;
+/// Border Radius
+$border-radius-default: 5px !default;
+// Placeholder Color
+$placeholder-color-default: #555555 !default;
+// Triangle
+$triangle-direction-default: right !default;
+$triangle-size-default: $base-px-default !default;
+$triangle-color-default: #222222 !default;
+$triangle-element-default: after !default;
+// Circle
+$circle-size-default: $base-px-default !default;
+$circle-color-default: inherit !default;
+$circle-border-width-default: null !default;
+$circle-border-color-default: #222222 !default;
+$circle-display-default: inline-block !default;
+// Square
+$square-size-default: $base-px-default !default;
+$square-color-default: black !default;
+$square-border-width-default: null !default;
+$square-border-color-default: grey !default;
+$square-element-default: after !default;
+// Position
+$position-default: null !default;
+// Tint/Shade
+$mix-percent-default: 15% !default;</code></pre>
+      </article>
+
+    </section>
+
+    <a class="top" href="#top"></a>
+    <footer>
+      <p>Built with <i class="shake shake-constant fa fa-heart"></i> by <a href="http://kylebrumm.com" onclick="_gaq.push(['_trackEvent', 'Engagement', 'Click', 'Link to Portfolio']);">Kyle Brumm</a></p>
+    </footer>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="build/js/main.min.js?v=2"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>

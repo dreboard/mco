@@ -1,0 +1,11 @@
+css/bootstrap-sass-master/
+css/juice-master
+img/
+_notes/
+map/_notes
+js/_notes
+node_modules/
+# Logs and databases #
+######################
+*.log
+*.sql
